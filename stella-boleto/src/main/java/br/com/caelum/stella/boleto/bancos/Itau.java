@@ -17,34 +17,18 @@ public class Itau implements Banco {
         StringBuilder codigoDeBarras = new StringBuilder();
         codigoDeBarras.append(getNumeroFormatado());
         codigoDeBarras.append(String.valueOf(boleto.getCodigoEspecieMoeda()));
-        // Digito Verificador sera inserido aqui.
-
         codigoDeBarras.append(boleto.getFatorVencimento());
         codigoDeBarras.append(boleto.getValorFormatado());
-
         Emissor emissor = boleto.getEmissor();
-
         codigoDeBarras.append(getCarteiraDoEmissorFormatado(emissor));
         codigoDeBarras.append(getNossoNumeroDoEmissorFormatado(emissor));
-        // Digito Verificador sera inserido aqui.
-
+        codigoDeBarras.append(dvGenerator.geraDigitoMod10((new StringBuilder(String.valueOf(emissor.getAgenciaFormatado()))).append(getContaCorrenteDoEmissorFormatado(emissor)).append(getCarteiraDoEmissorFormatado(emissor)).append(getNossoNumeroDoEmissorFormatado(emissor)).toString()));
         codigoDeBarras.append(emissor.getAgenciaFormatado());
         codigoDeBarras.append(getContaCorrenteDoEmissorFormatado(emissor));
-        // Digito Verificador sera inserido aqui.
-
+        codigoDeBarras.append(dvGenerator.geraDigitoMod10((new StringBuilder(String.valueOf(emissor.getAgenciaFormatado()))).append(getContaCorrenteDoEmissorFormatado(emissor)).toString()));
         codigoDeBarras.append("000");
-
-        codigoDeBarras.insert(38, this.dvGenerator.geraDigitoMod10(codigoDeBarras
-                .substring(30, 38)));
-
-        codigoDeBarras.insert(29, this.dvGenerator.geraDigitoMod10(codigoDeBarras
-                .substring(30, 38).concat(codigoDeBarras.substring(18, 28))));
-
-        codigoDeBarras.insert(4, this.dvGenerator.geraDigitoMod11(codigoDeBarras
-                .toString()));
-
+        codigoDeBarras.insert(4, dvGenerator.geraDigitoMod11(codigoDeBarras.toString()));
         String result = codigoDeBarras.toString();
-
         if (result.length() != 44) {
             throw new CriacaoBoletoException(
                     "Erro na geração do código de barras. Número de digitos diferente de 44. Verifique todos os dados.");

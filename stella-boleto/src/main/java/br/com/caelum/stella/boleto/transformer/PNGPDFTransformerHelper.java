@@ -27,16 +27,18 @@ class PNGPDFTransformerHelper {
 	public static final float IMAGEM_BOLETO_HEIGHT = 1604;
 	public static final double BOLETO_TEMPLATE_SCALE = 1 / 2d;
 
-	private static final float LINHA1 = 434;
-	private static final float LINHA2 = 412;
-	private static final float LINHA3 = 391;
+	private static final float LINHA1A = 434;
+	private static final float LINHA1B = 424;
+	private static final float LINHA2 = 402;
+	private static final float LINHA3 = 381;
 	private static final float LINHA4 = 319;
 	private static final float LINHA5 = 291;
 	private static final float LINHA6 = 271;
 	private static final float LINHA7 = 250;
 	private static final float LINHA8 = 227;
 	private static final float LINHA9 = 205;
-	private static final float LINHA10 = 132;
+	private static final float LINHA10A = 135;
+	private static final float LINHA10B = 125;
 	private static final float LINHA11 = 97;
 	private static final float LINHA12 = 87;
 	private static final float LINHA13 = 77;
@@ -73,19 +75,18 @@ class PNGPDFTransformerHelper {
 					.get(i));
 		}
 
-		this.writer.write(50, LINHA1, boleto.getEmissor().getCedente());
+		this.writer.write(65, LINHA1A, boleto.getEmissor().getCedente());
+		this.writer.write(65, LINHA1B, boleto.getEmissor().getEnderecoCedente());
 
 		this.writer.write(5, LINHA2, boleto.getSacado().getNome());
 
-		this.writer.write(230, LINHA2, formatDate(boleto.getDatas()
+		this.writer.write(295, LINHA2, formatDate(boleto.getDatas()
 				.getVencimento()));
 
 		this.writer.write(400, LINHA2, BoletoFormatter.formatValue(boleto
 				.getValorBoleto().doubleValue()));
 
 		this.writer.write(5, LINHA3, boleto.getEmissor().getAgenciaFormatado()
-				+ "-"
-				+ boleto.getEmissor().getDigitoAgencia()
 				+ " / "
 				+ boleto.getBanco().getContaCorrenteDoEmissorFormatado(
 						boleto.getEmissor()) + "-"
@@ -113,8 +114,6 @@ class PNGPDFTransformerHelper {
 
 		this.writer.write(420, LINHA6, boleto.getEmissor()
 				.getAgenciaFormatado()
-				+ " - "
-				+ boleto.getEmissor().getDigitoAgencia()
 				+ " / "
 				+ boleto.getBanco().getContaCorrenteDoEmissorFormatado(
 						boleto.getEmissor())
@@ -154,7 +153,8 @@ class PNGPDFTransformerHelper {
 					.write(5, LINHA9 - i * 10, boleto.getInstrucoes().get(i));
 		}
 
-		this.writer.write(5, LINHA10, boleto.getEmissor().getCedente());
+		this.writer.write(5, LINHA10A, boleto.getEmissor().getCedente());
+		this.writer.write(5, LINHA10B, boleto.getEmissor().getEnderecoCedente());
 
 		this.writer.write(100, LINHA11, (boleto.getSacado().getNome() != null ? boleto.getSacado().getNome() : "") + " "
 				+ (boleto.getSacado().getCpf() != null ? boleto.getSacado().getCpf() : ""));

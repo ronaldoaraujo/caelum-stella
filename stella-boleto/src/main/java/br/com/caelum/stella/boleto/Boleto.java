@@ -402,9 +402,9 @@ public class Boleto {
      * tiver mais de 5 elementos
      */
     public Boleto withDescricoes(String... descricoes) {
-        if (descricoes.length > 5) {
+        if (descricoes.length > 10) {
             throw new IllegalArgumentException(
-                    "maximo de 5 descricoes permitidas");
+                    "maximo de 10 descricoes permitidas");
         }
         this.descricoes = Arrays.asList(descricoes);
         return this;

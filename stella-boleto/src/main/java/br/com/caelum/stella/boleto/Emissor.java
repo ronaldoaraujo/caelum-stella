@@ -10,14 +10,15 @@ package br.com.caelum.stella.boleto;
  */
 public class Emissor {
 	private int agencia;
-	private char digitoAgencia;
+	private int digitoAgencia;
 	private long contaCorrente;
 	private int carteira;
 	private long numeroConvenio;
 	private long nossoNumero;
 	private String cedente;
-	private char digitoContaCorrente;
-	private char digitoNossoNumero;
+	private String enderecoCedente;
+	private int digitoContaCorrente;
+	private int digitoNossoNumero;
 	private int codigoOperacao;
 	private int codigoFornecidoPelaAgencia;
 
@@ -180,7 +181,7 @@ public class Emissor {
 	 * @see Emissor#getDigitoContaCorrente()
 	 */
 	@Deprecated
-	public char getDvContaCorrente() {
+	public int getDvContaCorrente() {
 		return getDigitoContaCorrente();
 	}
 
@@ -189,7 +190,7 @@ public class Emissor {
 	 * 
 	 * @return
 	 */
-	public char getDigitoContaCorrente() {
+	public int getDigitoContaCorrente() {
 		return this.digitoContaCorrente;
 	}
 
@@ -198,7 +199,7 @@ public class Emissor {
 	 * @see Emissor#withDigitoContaCorrente(char)
 	 */
 	@Deprecated
-	public Emissor withDvContaCorrente(char dv) {
+	public Emissor withDvContaCorrente(int dv) {
 		return withDigitoContaCorrente(dv);
 	}
 
@@ -208,7 +209,7 @@ public class Emissor {
 	 * @param dv
 	 * @return
 	 */
-	public Emissor withDigitoContaCorrente(char dv) {
+	public Emissor withDigitoContaCorrente(int dv) {
 		this.digitoContaCorrente = dv;
 		return this;
 	}
@@ -218,7 +219,7 @@ public class Emissor {
 	 * @see Emissor#getDigitoAgencia()
 	 */
 	@Deprecated
-	public char getDvAgencia() {
+	public int getDvAgencia() {
 		return getDigitoAgencia();
 	}
 
@@ -227,7 +228,7 @@ public class Emissor {
 	 * 
 	 * @return
 	 */
-	public char getDigitoAgencia() {
+	public int getDigitoAgencia() {
 		return this.digitoAgencia;
 	}
 
@@ -236,7 +237,7 @@ public class Emissor {
 	 * @see Emissor#withDigitoAgencia(char)
 	 */
 	@Deprecated
-	public Emissor withDvAgencia(char dv) {
+	public Emissor withDvAgencia(int dv) {
 		return withDigitoAgencia(dv);
 	}
 
@@ -246,7 +247,7 @@ public class Emissor {
 	 * @param dv
 	 * @return
 	 */
-	public Emissor withDigitoAgencia(char dv) {
+	public Emissor withDigitoAgencia(int dv) {
 		this.digitoAgencia = dv;
 		return this;
 	}
@@ -341,7 +342,7 @@ public class Emissor {
 	 * @see Emissor#withDigitoNossoNumero(char)
 	 */
 	@Deprecated
-	public Emissor withDvNossoNumero(char dvNossoNumero) {
+	public Emissor withDvNossoNumero(int dvNossoNumero) {
 		return withDigitoNossoNumero(dvNossoNumero);
 	}
 
@@ -350,17 +351,22 @@ public class Emissor {
 	 * 
 	 * @param dvNossoNumero
 	 */
-	public Emissor withDigitoNossoNumero(char dvNossoNumero) {
+	public Emissor withDigitoNossoNumero(int dvNossoNumero) {
 		this.digitoNossoNumero = dvNossoNumero;
 		return this;
 	}
 
+	public Emissor withEnderecoCedente(String enderecoCedente) {
+		this.enderecoCedente = enderecoCedente;
+		return this;
+	}
+	
 	/**
 	 * @deprecated
 	 * @see Emissor#getDigitoNossoNumero()
 	 */
 	@Deprecated
-	public char getDvNossoNumero() {
+	public int getDvNossoNumero() {
 		return getDigitoNossoNumero();
 	}
 
@@ -369,7 +375,16 @@ public class Emissor {
 	 * 
 	 * @return
 	 */
-	public char getDigitoNossoNumero() {
+	public int getDigitoNossoNumero() {
 		return this.digitoNossoNumero;
 	}
+	/**
+	 * Devolve o Endereço do Cedente
+	 * 
+	 * @return
+	 */
+	public String getEnderecoCedente() {
+		return enderecoCedente;
+	}
+
 }
